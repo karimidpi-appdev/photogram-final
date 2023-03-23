@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  # Routes for the Follow user resource:
+
+  get("/users", { :controller => "users", :action => "index" })
+  
+  get("/", { :controller => "users", :action => "index" })
+
   # Routes for the Follow request resource:
 
   # CREATE
