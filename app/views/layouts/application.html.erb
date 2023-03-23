@@ -31,7 +31,7 @@
       <% if session.fetch(:user_id) != nil %>
         <li>
           <a href="/edit_user_profile">
-              bob
+            bob
           </a>
         </li>
 
@@ -54,6 +54,9 @@
       </li>
       <% end %>
     </ul>
+
+    <p style="color: green"><%= notice %></p>
+    <p style="color: red"><%= alert %></p>
 
     <%= yield %>
   </body>

@@ -8,8 +8,11 @@
         <th>
             Private?
         </th>
-
+        <% if session.fetch(:user_id) != nil %>
         <th></th>
+        <% end %>
+        <th></th>
+        
     </tr>
     <% @list_of_users.each do |a_user| %>
         <tr>
@@ -21,9 +24,21 @@
                 <%= "Yes" %>
               <% else %>
                 <%= "No" %>
-              <% end %>
-                
+              <% end %>  
             </td>
+            <% if session.fetch(:user_id) != nil %>
+            
+              <td>
+                <form action="/insert_follow_request" method="post">
+                <input type="hidden" name="query_recipient_id" value="117">
+
+                <button>
+                  Follow
+                </button>
+              </form>
+              </td>
+
+            <% end %>
             <td>
                 <a href="/users/<%= a_user.username %>">
                     Show details
