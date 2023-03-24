@@ -115,9 +115,22 @@
     <th>Posted</th>
   </tr>  
 
-  <%# @list_of_com do |a_comment| %>
+  <% @the_photo.comments.each do |comment| %>
+    <tr>
+      <td>
+        <%= comment.commenter.username %>
+      </td>
+
+      <td>
+        <%= comment.body %>
+      </td>
+
+      <td>
+        <%= time_ago_in_words(comment.created_at) %> ago
+      </td>
+    </tr>
  
-  <%# end %>
+  <% end %>
 
 </table>
 
