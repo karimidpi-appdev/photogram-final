@@ -74,13 +74,6 @@
         </label>
 
         <input type="file" id="image_box" name="query_image" value="<%= @the_photo.image %>">
-        <!-- 
-        <label for="owner_id_box">
-          Owner
-        </label>
-
-        <input type="text" id="owner_id_box" name="query_owner_id" value="<%= @the_photo.owner_id %>">
-        -->
 
         <label for="caption_box">
           Caption
@@ -94,12 +87,14 @@
       </form>
     </dd>
 
-    <dt>
-      Delete photo
-    </dt>
-    <dd>
-        <a href="/delete_photo/<%= @the_photo.id %>">Delete this photo</a>
-    </dd>
+    <% if @the_photo.poster.id == session.fetch(:user_id) %>
+      <dt>
+        Delete photo
+      </dt>
+      <dd>
+          <a href="/delete_photo/<%= @the_photo.id %>">Delete this photo</a>
+      </dd>
+    <% end %>
 
   </dl>
 </div>
