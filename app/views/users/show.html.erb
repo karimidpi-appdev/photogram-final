@@ -5,27 +5,27 @@
   <dd><%= @user.private %></dd>
 
   <dt>Followers</dt>
-  <dd></dd>
+  <dd><%= @user.followers.count %></dd>
   <dd>
     <a href="">Unfollow</a>
   </dd>
   <dt>Following</dt>
-  <dd></dd>
+  <dd><%= @user.following.count %></dd>
 </dl>
 
 <nav>
   <ul>
     <li>
-      <a href="/users/carol">Profile</a>
+      <a href="/users/<%= @user.username %>">Profile</a>
     </li>
     <li>
-      <a href="/users/carol/liked_photos">Liked photos</a>
+      <a href="/users/<%= @user.username %>/liked_photos">Liked photos</a>
     </li>
     <li>
-      <a href="/users/carol/feed">Feed</a>
+      <a href="/users/<%= @user.username %>/feed">Feed</a>
     </li>
     <li>
-      <a href="/users/carol/discover">Discover</a>
+      <a href="/users/<%= @user.username %>/discover">Discover</a>
     </li>
   </ul>
 </nav>
