@@ -9,7 +9,7 @@
 #  recipient_id :integer
 #  sender_id    :integer
 #
-class FollowRequest < 
+class FollowRequest < ApplicationRecord
   validates(:recipient, {:presence => true })
   validates(:sender, {:presence => true })
   
