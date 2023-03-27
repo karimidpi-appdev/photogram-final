@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      Comment #<%= @the_comment.id %> details
+      Comment #<%#= @the_comment.id %> details
     </h1>
 
     <div>
@@ -12,7 +12,7 @@
       </div>
 
       <div>
-        <a href="/delete_comment/<%= @the_comment.id %>">
+        <a href="/delete_comment/<%#= @the_comment.id %>">
           Delete comment
         </a>
       </div>
@@ -23,35 +23,35 @@
         Body
       </dt>
       <dd>
-        <%= @the_comment.body %>
+        <%#= @the_comment.body %>
       </dd>
 
       <dt>
         Author
       </dt>
       <dd>
-        <%= @the_comment.author_id %>
+        <%#= @the_comment.author_id %>
       </dd>
 
       <dt>
         Photo
       </dt>
       <dd>
-        <%= @the_comment.photo_id %>
+        <%#= @the_comment.photo_id %>
       </dd>
 
       <dt>
         Created at
       </dt>
       <dd>
-        <%= time_ago_in_words(@the_comment.created_at) %> ago
+        <%#= time_ago_in_words(@the_comment.created_at) %> ago
       </dd>
 
       <dt>
         Updated at
       </dt>
       <dd>
-        <%= time_ago_in_words(@the_comment.updated_at) %> ago
+        <%#= time_ago_in_words(@the_comment.updated_at) %> ago
       </dd>
     </dl>
   </div>
@@ -66,13 +66,13 @@
       Edit comment
     </h2>
 
-    <form action="/modify_comment/<%= @the_comment.id %>"  method="post" >
+    <form action="/modify_comment/<%#= @the_comment.id %>"  method="post" >
       <div>
         <label for="body_box">
           Body
         </label>
 
-        <textarea id="body_box" name="query_body"><%= @the_comment.body %></textarea>
+        <textarea id="body_box" name="query_body"><%#= @the_comment.body %></textarea>
       </div>
 
       <div>
@@ -80,7 +80,7 @@
           Author
         </label>
 
-        <input type="text" id="author_id_box" name="query_author_id" value="<%= @the_comment.author_id %>">
+        <input type="text" id="author_id_box" name="query_author_id" value="<%#= @the_comment.author_id %>">
       </div>
 
       <div>
@@ -88,7 +88,7 @@
           Photo
         </label>
 
-        <input type="text" id="photo_id_box" name="query_photo_id" value="<%= @the_comment.photo_id %>">
+        <input type="text" id="photo_id_box" name="query_photo_id" value="<%#= @the_comment.photo_id %>">
       </div>
 
       <button>
