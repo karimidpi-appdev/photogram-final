@@ -5,10 +5,22 @@
   <dd><%= @user.private %></dd>
 
   <dt>Followers</dt>
-  <dd><%= @user.followers.count %></dd>
-  <dd>
-    <a href="">Unfollow</a>
+  <dd><%= @user.followers.count %>
+
+    <% if session.fetch(:user_id) != @user.id %>
+      <div>
+        <form action="/insert_follow_request" method="post">
+          <input type="hidden" name="query_recipient_id" value="106">
+          <button>
+            Follow
+          </button>
+        </form>
+      </div>
+    
+       <a href="">Unfollow</a> 
+    <% end %>
   </dd>
+  
   <dt>Following</dt>
   <dd><%= @user.following.count %></dd>
 </dl>
