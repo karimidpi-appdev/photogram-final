@@ -50,7 +50,7 @@
       Fans
     </dt>
     <dd>
-      name of fans
+      <%= @the_photo.fan_list %>
     </dd>
 
     <dt>
@@ -59,6 +59,7 @@
     <dd>
       <form action="/insert_like" method="post">
         <input type="hidden" value="<%= @the_photo.id %>" name="query_photo_id">
+        <input type="hidden" value="<%= session.fetch(:user_id) %>" name="query_fan_id">
         <button>Like</button>
       </form>
     </dd>
