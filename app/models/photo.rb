@@ -16,7 +16,11 @@ class Photo < ApplicationRecord
   validates(:poster, { :presence => true })
   validates(:image, { :presence => true })
 
+  belongs_to(:owner, { :class_name => "User", :counter_cache => :own_photos_count })
 
+  has_many(:likes, { :dependent => :destroy })
+
+  has_many(:comments, { :dependent => :destroy })
 
   def poster
     return User.where({ :id => self.owner_id }).at(0)

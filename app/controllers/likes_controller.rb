@@ -24,6 +24,7 @@ class LikesController < ApplicationController
 
     if the_like.valid?
       the_like.save
+
       redirect_to("/photos/#{the_like.photo_id}", { :notice => "Like created successfully." })
     else
       redirect_to("/photos/#{the_like.photo_id}", { :alert => the_like.errors.full_messages.to_sentence })
@@ -50,6 +51,7 @@ class LikesController < ApplicationController
     the_like = Like.where({ :id => the_id }).at(0)
 
     the_like.destroy
+
 
     redirect_to("/photos/#{the_like.photo_id }", { :notice => "Like deleted successfully."} )
   end

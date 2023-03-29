@@ -69,7 +69,7 @@
           <input type="hidden" value="<%= session.fetch(:user_id) %>" name="query_fan_id">
           <button>Like</button>
         </form>
-        <%#= @the_photo.likes_count += 1 %>
+        <%# @the_photo.likes_count += 1 %>
       </dd>
     <% else %>
           <a href="/delete_like/<%= the_like.id %>">Unlike</a>   
