@@ -16,6 +16,8 @@ class Photo < ApplicationRecord
   validates(:poster, { :presence => true })
   validates(:image, { :presence => true })
 
+
+
   def poster
     return User.where({ :id => self.owner_id }).at(0)
   end
@@ -31,7 +33,7 @@ class Photo < ApplicationRecord
   def fans
     array_of_user_ids = self.likes.map_relation_to_array(:fan_id)
 
-    return User.where({ :id => array_of_user_ids })
+    return User.where({ :id => array_of_user_ids }).order({ :created_at => :desc })
   end
 
   def fan_list

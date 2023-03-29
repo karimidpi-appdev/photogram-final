@@ -53,10 +53,13 @@
       <%= @the_photo.fan_list %>
     </dd>
 
-    <% photo_fans_id = @the_photo.fans %>
-    <% the_like = @the_photo.likes.at(0) %>
+    <% photo_fans = @the_photo.fans %>
 
-    <% if photo_fans_id.exclude?(@current_user) %>
+    <% all_current_user_likes = Like.where({ :fan_id => session.fetch(:user_id) }) %>
+
+    <% the_like = all_current_user_likes.where({ :photo_id => @the_photo.id }).at(0) %>
+
+    <% if photo_fans.exclude?(@current_user) %>
       <dt>
         Add a fan
       <dt>
@@ -66,9 +69,11 @@
           <input type="hidden" value="<%= session.fetch(:user_id) %>" name="query_fan_id">
           <button>Like</button>
         </form>
+        <%#= @the_photo.likes_count += 1 %>
       </dd>
     <% else %>
-      <a href="/delete_like/<%= the_like.id %>">Unlike</a>
+          <a href="/delete_like/<%= the_like.id %>">Unlike</a>   
+        
     <% end %>
 
 
@@ -76,7 +81,7 @@
       Edit photo
     </dt>
     <dd>
-      <form action="/modify_photo/<%= @the_photo.id %>"  method="post" >
+      <form action="/modify_photo/<%= @the_photo.likes %>"  method="post" >
       
         <label for="image_box">
           Image URL
