@@ -10,8 +10,19 @@
 #  sender_id    :integer
 #
 class FollowRequest < ApplicationRecord
+
   validates(:recipient, {:presence => true })
+
   validates(:sender, {:presence => true })
+
+
+  # Direct Associations
+
+  belongs_to(:sender, { :class_name => "User", :counter_cache => :sent_follow_requests_count })
+
+  belongs_to(:recipient, { :class_name => "User", :counter_cache => :received_follow_requests_count })
+
+  
   
   def recipient
     return User.where({ :id => self.recipient_id }).at(0)

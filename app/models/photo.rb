@@ -16,11 +16,24 @@ class Photo < ApplicationRecord
   validates(:poster, { :presence => true })
   validates(:image, { :presence => true })
 
-  belongs_to(:owner, { :class_name => "User", :counter_cache => :own_photos_count })
+
+  # Direct Associations
+
+  belongs_to(:owner, { :class_name => "User"})
 
   has_many(:likes, { :dependent => :destroy })
 
   has_many(:comments, { :dependent => :destroy })
+
+
+  # Indirect Associations
+
+  has_many(:fans, { :through => :likes, :source => :user })
+
+  has_many(:followers, { :through => :owner, :source => :following })
+
+  has_many(:fan_followers, { :through => :fans, :source => :following })
+
 
   def poster
     return User.where({ :id => self.owner_id }).at(0)

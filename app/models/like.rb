@@ -9,13 +9,20 @@
 #  photo_id   :integer
 #
 class Like < ApplicationRecord
+  
+  validates(:photo_id, { :presence => true })
+  
+  validates(:photo_id, { :uniqueness => { :scope => ["fan_id"], :message => "already liked" } })
+  
+  validates(:fan_id, { :presence => true })
 
-  validates(:fan, { :presence => true })
-  validates(:photo, { :presence => true })
+  # Direct Associations
 
   belongs_to(:user, { :foreign_key => "fan_id" })
 
   belongs_to(:photo, { :counter_cache => true })
+
+
 
   def fan
     return User.where({ :id => self.fan_id }).at(0)

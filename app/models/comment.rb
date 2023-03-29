@@ -15,9 +15,13 @@ class Comment < ApplicationRecord
   validates(:photo, {:presence => true })
   validates(:body, {:presence => true })
 
+  # Direct Associations
   belongs_to(:commenter, { :class_name => "User", :foreign_key => "author_id" })
 
   belongs_to(:photo, { :counter_cache => true })
+
+
+  
 
   def commenter
     return User.where({ :id => self.author_id }).at(0)
