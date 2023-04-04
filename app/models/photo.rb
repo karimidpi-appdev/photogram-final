@@ -6,25 +6,25 @@
 #  caption        :text
 #  comments_count :integer
 #  image          :string
+#  image_url      :string
 #  likes_count    :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  owner_id       :integer
 #
 class Photo < ApplicationRecord
+  mount_uploader :image, ImageUploader
 
   validates(:poster, { :presence => true })
   validates(:image, { :presence => true })
 
-
   # Direct Associations
 
-  belongs_to(:owner, { :class_name => "User"})
+  belongs_to(:owner, { :class_name => "User" })
 
   has_many(:likes, { :dependent => :destroy })
 
   has_many(:comments, { :dependent => :destroy })
-
 
   # Indirect Associations
 
@@ -33,7 +33,6 @@ class Photo < ApplicationRecord
   has_many(:followers, { :through => :owner, :source => :following })
 
   has_many(:fan_followers, { :through => :fans, :source => :following })
-
 
   def poster
     return User.where({ :id => self.owner_id }).at(0)
@@ -44,7 +43,7 @@ class Photo < ApplicationRecord
   end
 
   def likes
-    return Like.where({ :photo_id => self.id})
+    return Like.where({ :photo_id => self.id })
   end
 
   def fans
@@ -56,5 +55,4 @@ class Photo < ApplicationRecord
   def fan_list
     return self.fans.map_relation_to_array(:username).to_sentence
   end
-
 end
