@@ -7,19 +7,42 @@
   <dt>Followers</dt>
   <dd><%= @user.followers.count %>
 
-    <% if session.fetch(:user_id) != @user.id %>
-      <div>
-        <form action="/insert_follow_request" method="post">
-          <input type="hidden" name="query_recipient_id" value="106">
-          <button>
-            Follow
-          </button>
-        </form>
-      </div>
-    
-       <a href="">Unfollow</a> 
+  <dt>
+    <strong>Pending follow requests</strong>
+  </dt>
+  <dd>
+
+  </dd>
+
+  <dd>
+    <% if @current_user.id != @user.id %>
+      <form action="/insert_follow_request" method="post">
+        <input type="hidden" name="query_recipient_id" value="<%= @user.id %>">
+
+        <button>
+          Follow
+        </button>
+      </form>
+      <a href="/delete_follow_request/<%= %>">
+        Unfollow
+      </a>
     <% end %>
   </dd>
+
+  <% if @user.id == @current_user.id %>
+    <dt>Edit user</dt>
+    <dd>
+      <form action="/modify_user/" method="post">
+        <label for="browser_username">Username</label>
+        <input id="browser_username" type="text" name="query_username" placeholder="Enter a username..." value="<%= @current_user.username %>">
+
+        <label for="browser_private">Private?</label>
+        <input id="browser_private" type="checkbox" name="query_private">
+
+        <button>Update user</button>
+      </form>
+    </dd>
+  <% end %>
   
   <dt>Following</dt>
   <dd><%= @user.following.count %></dd>
