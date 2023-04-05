@@ -1,0 +1,98 @@
+<h1><%= @current_user.username %></h1>
+
+<dl>
+  <dt>Private</dt>
+  <dd><%= @current_user.private %></dd>
+
+  <dt>Followers</dt>
+  <dd><%= @current_user.followers.count %>
+
+  <dt>Following</dt>
+  <dd><%= @current_user.following.count %></dd>
+
+</dl>
+
+<nav>
+  <ul>
+    <li>
+      <a href="/users/<%= @current_user.username %>">Profile</a>
+    </li>
+    <li>
+      <a href="/users/<%= @current_user.username %>/liked_photos">Liked photos</a>
+    </li>
+    <li>
+      <a href="/users/<%= @current_user.username %>/feed">Feed</a>
+    </li>
+    <li>
+      <a href="/users/<%= @current_user.username %>/discover">Discover</a>
+    </li>
+  </ul>
+</nav>
+
+
+<h2>Discover (<%= @current_user.discover.count %>)</h2>
+
+<table border="1">
+  <tr>
+    <th>
+      Image
+    </th>
+
+    <th>
+      Owner
+    </th>
+
+    <th>
+      Caption
+    </th>
+
+    <th>
+      Posted
+    </th>
+
+    <th>
+      Likes
+    </th>
+
+    <th></th>
+  </tr>
+
+  <% @current_user.discover.each do |photo| %>
+  <tr>
+    <td>
+      <img src="<%= photo.image.blank? ? photo.fetch("image_url") : photo.image %>" class="img-responsive">
+    </td>
+
+    <td>
+      <%= photo.poster.username %>
+    </td>
+
+    <td>
+      <%= photo.caption %>
+    </td>
+
+    <td>
+      <%= time_ago_in_words(photo.created_at) %> ago
+    </td>
+
+    <td>
+      <%= photo.likes_count %>
+    </td>
+    
+    <% if @current_user != nil %>
+      <td>
+        <a href="/photos/<%= photo.id %>">
+          Show details
+        </a>
+      </td>
+      <% else %>
+      <td>
+        <a href="/user_sign_in">
+          Show details
+        </a>
+      </td>
+    <% end %>
+  </tr>
+
+  <% end %>
+</table>

@@ -33,7 +33,9 @@ class UsersController < ApplicationController
     render({ :template => "users/feed.html.erb" })
   end
 
- 
+  def discover
+    render({ :template => "users/discover.html.erb" })
+  end
 
 
 end
