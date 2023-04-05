@@ -9,8 +9,25 @@ class UsersController < ApplicationController
 
   def show
     the_username = params.fetch("the_username")
-    @user = User.where({ :username => the_username }).at(0)
-    
+    matching_users = User.where({ :username => the_username })
+    @user = matching_users.at(0)
+
+    matching_follow_requests = FollowRequest.all
+
+    @list_of_follow_requests = matching_follow_requests.order({ :created_at => :desc })
+
+    if @current_user == nil
+      redirect_to("/user_sign_in", { :notice => "You have to sign in first." })
+    else
     render({ :template => "users/show.html.erb" })
+    end
   end
+
+  def liked_photos
+    @photos = @current_user.liked_photos
+
+    render({ :template => "users/liked_photos.html.erb" })
+  end
+
+
 end
