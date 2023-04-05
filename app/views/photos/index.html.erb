@@ -7,21 +7,23 @@
 <hr>
 
 <div>
+    <% if @current_user != nil %>
 
-    <form action="/insert_photo" method="post" class="form-horizontal" enctype="multipart/form-data">
+        <form action="/insert_photo" method="post" class="form-horizontal" enctype="multipart/form-data">
 
-        <label for="image">Image</label>
-        <input type="file" id="image" name="image" class="form-control">
+            <label for="image">Image</label>
+            <input type="file" id="image" name="image" class="form-control">
 
-        <label for="owner_id_box"><!-- owner --></label>
-        <input type="hidden" id="owner_id_box" name="query_owner_id" value="<%= session.fetch(:user_id)%>">
+            <label for="owner_id_box"><!-- owner --></label>
+            <input type="hidden" id="owner_id_box" name="query_owner_id" value="<%= session.fetch(:user_id)%>">
 
-        <label for="caption_box">Caption</label>
-        <textarea id="caption_box" name="query_caption" rows="3"></textarea>
+            <label for="caption_box">Caption</label>
+            <textarea id="caption_box" name="query_caption" rows="3"></textarea>
 
-        <button>Add photo</button>
+            <button>Add photo</button>
 
-    </form>
+        </form>
+    <% end %>
 
 </div>
 
@@ -67,12 +69,13 @@
 
         <% @list_of_photos.each do |a_photo| %>
             <tr>
+            <% if a_photo.poster.private == false %>
                 <td>
                     <%= a_photo.id %>
                 </td>
 
                 <td>
-                    <img src="<%= a_photo.image.blank? ? a_photo.fetch("image_url") : a_photo.image %>" class="img-responsive">
+                     <img src="<%= a_photo.image.blank? ? a_photo.fetch("image_url") : a_photo.image %>" class="img-responsive">
                 </td>
 
                 <td>
@@ -99,9 +102,16 @@
                     <%= time_ago_in_words(a_photo.updated_at) %>ago
                 </td>
 
-                <td>
-                    <a href="/photos/<%= a_photo.id %>">Show details</a>
-                </td>
+                <% if @current_user == nil %>
+                    <td>
+                        <a href="/user_sign_in">Show details</a>
+                    </td>    
+                <% else %>
+                    <td>
+                        <a href="/photos/<%= a_photo.id %>">Show details</a>
+                    </td>
+                <% end %>
+            <% end %>
             </tr>
         <% end %>
     </table>

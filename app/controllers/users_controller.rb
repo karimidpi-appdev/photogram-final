@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
     @list_of_users = matching_users.order({ :created_at => :desc })
 
-    render({ :template => "users/index.html.erb" })
+      render({ :template => "users/index.html.erb" })
   end
 
   def show
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     if @current_user == nil
       redirect_to("/user_sign_in", { :notice => "You have to sign in first." })
     else
-    render({ :template => "users/show.html.erb" })
+      render({ :template => "users/show.html.erb" })
     end
   end
 
@@ -36,6 +36,4 @@ class UsersController < ApplicationController
   def discover
     render({ :template => "users/discover.html.erb" })
   end
-
-
 end
