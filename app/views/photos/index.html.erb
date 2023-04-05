@@ -1,115 +1,110 @@
 <div>
-    <div>
-        <h1>
-            List of photos
-        </h1>
-    </div>
+    <h1>
+        List of photos
+    </h1>
 </div>
 
 <hr>
 
-    <div>
+<div>
 
-        <form action="/insert_photo" method="post" class="form-horizontal" enctype="multipart/form-data">
+    <form action="/insert_photo" method="post" class="form-horizontal" enctype="multipart/form-data">
 
-            <label for="image">Image</label>
-            <input type="file" id="image" name="image" class="form-control">
+        <label for="image">Image</label>
+        <input type="file" id="image" name="image" class="form-control">
 
-                <label for="owner_id_box"><!-- owner --></label>
-                <input type="hidden" id="owner_id_box" name="query_owner_id" value="<%= session.fetch(:user_id)%>">
+        <label for="owner_id_box"><!-- owner --></label>
+        <input type="hidden" id="owner_id_box" name="query_owner_id" value="<%= session.fetch(:user_id)%>">
 
-                    <label for="caption_box">Caption</label>
-                    <textarea id="caption_box" name="query_caption" rows="3"></textarea>
+        <label for="caption_box">Caption</label>
+        <textarea id="caption_box" name="query_caption" rows="3"></textarea>
 
-                    <button>Add photo</button>
+        <button>Add photo</button>
 
-                </form>
+    </form>
 
-            </div>
+</div>
 
-            <hr>
-                <div>
-                    <div>
-                        <table border="1">
-                            <tr>
-                                <th>
-                                    ID
-                                </th>
+<hr>
 
-                                <th>
-                                    Image
-                                </th>
+<div>
+    <table border="1">
+        <tr>
+            <th>
+                ID
+            </th>
 
-                                <th>
-                                    Owner
-                                </th>
+            <th>
+                Image
+            </th>
 
-                                <th>
-                                    Caption
-                                </th>
+            <th>
+                Owner
+            </th>
 
-                                <th>
-                                    Likes count
-                                </th>
+            <th>
+                Caption
+            </th>
 
-                                <th>
-                                    Comments count
-                                </th>
+            <th>
+                Likes count
+            </th>
 
-                                <th>
-                                    Created at
-                                </th>
+            <th>
+                Comments count
+            </th>
 
-                                <th>
-                                    Updated at
-                                </th>
+            <th>
+                Created at
+            </th>
 
-                                <th></th>
-                            </tr>
+            <th>
+                Updated at
+            </th>
 
-                            <% @list_of_photos.each do |a_photo| %>
-                                <tr>
-                                    <td>
-                                        <%= a_photo.id %>
-                                    </td>
+            <th></th>
+        </tr>
 
-                                    <td>
-                                        <img src="<%= a_photo.image.blank? ? a_photo.fetch("image_url") : a_photo.image %>" class="img-responsive"></td>
+        <% @list_of_photos.each do |a_photo| %>
+            <tr>
+                <td>
+                    <%= a_photo.id %>
+                </td>
 
-                                        <td>
-                                            <%= a_photo.poster.username %>
-                                        </td>
+                <td>
+                    <img src="<%= a_photo.image.blank? ? a_photo.fetch("image_url") : a_photo.image %>" class="img-responsive">
+                </td>
 
-                                        <td>
-                                            <%= a_photo.caption %>
-                                        </td>
+                <td>
+                    <%= a_photo.poster.username %>
+                </td>
 
-                                        <td>
-                                            <%= a_photo.likes_count %>
-                                        </td>
+                <td>
+                    <%= a_photo.caption %>
+                </td>
 
-                                        <td>
-                                            <%= a_photo.comments_count %>
-                                        </td>
+                <td>
+                    <%= a_photo.likes_count %>
+                </td>
 
-                                        <td>
-                                            <%= time_ago_in_words(a_photo.created_at) %>
-                                            ago
-                                        </td>
-                                        <td>
-                                            <%= time_ago_in_words(a_photo.updated_at) %>
-                                            ago
-                                        </td>
+                <td>
+                    <%= a_photo.comments_count %>
+                </td>
 
-                                        <td>
-                                            <a href="/photos/<%= a_photo.id %>">
-                                                Show details
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <% end %>
-                            </table>
-                        </div>
-                    </div>
+                <td>
+                    <%= time_ago_in_words(a_photo.created_at) %>ago
+                </td>
 
-                    <hr>
+                <td>
+                    <%= time_ago_in_words(a_photo.updated_at) %>ago
+                </td>
+
+                <td>
+                    <a href="/photos/<%= a_photo.id %>">Show details</a>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</div>
+
+                    
